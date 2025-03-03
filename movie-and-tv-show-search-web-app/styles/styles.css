@@ -1,0 +1,21 @@
+html {
+    --tmdbSearchColumns: 1;
+}
+
+@media only screen and (min-width: 512px) {
+    html {
+        --tmdbSearchColumns: 2;
+    }
+}
+
+@media only screen and (min-width: 752px) {
+    html {
+        --tmdbSearchColumns: 3;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    html {
+        --tmdbSearchColumns: 4;
+    }
+}
