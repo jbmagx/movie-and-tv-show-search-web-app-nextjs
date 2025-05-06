@@ -15,7 +15,7 @@ interface CarouselProps {
 type Card = {
     src: string;
     title: string;
-    release_date: string;
+    date: string;
     content: React.ReactNode;
 };
 
@@ -175,23 +175,14 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                             exit={{ opacity: 0 }}
                             ref={containerRef}
                             layoutId={layout ? `card-${card.title}` : undefined}
-                            className="max-w-5xl mx-auto bg-white dark:bg-neutral-900 h-fit z-[60] my-28 rounded-xl font-sans relative"
+                            className="max-w-4xl mx-auto bg-transparent h-fit z-[60] my-28 rounded-2xl font-sans relative"
                         >
-                            <button className="absolute top-4 right-4 h-8 w-8 ml-auto bg-black dark:bg-white rounded-full flex items-center justify-center" onClick={handleClose}>
+                            <button
+                                className="absolute top-4 right-4 z-50 h-8 w-8 ml-auto bg-black dark:bg-white hover:opacity-80 hover:[&>svg]:opacity-80 duration-300 rounded-full flex items-center justify-center"
+                                onClick={handleClose}
+                            >
                                 <IconX className="h-6 w-6 text-neutral-100 dark:text-neutral-900" />
                             </button>
-                            {/* <motion.p
-                                layoutId={layout ? `title-${card.title}` : undefined}
-                                className="text-2xl font-semibold text-neutral-700 mt-4 dark:text-white"
-                            >
-                                {card.title}
-                            </motion.p>
-                            <motion.p
-                                layoutId={layout ? `category-${card.title}` : undefined}
-                                className="text-base font-medium text-black dark:text-white"
-                            >
-                                {card.release_date}
-                            </motion.p> */}
                             <>{card.content}</>
                         </motion.div>
                     </div>
@@ -210,8 +201,8 @@ export const Card = ({ card, index, layout = false }: { card: Card; index: numbe
                     >
                         {card.title}
                     </motion.p>
-                    <motion.p layoutId={layout ? `category-${card.release_date}` : undefined} className="line-clamp-1 text-white text-xs font-medium font-sans text-left">
-                        {card.release_date}
+                    <motion.p layoutId={layout ? `category-${card.date}` : undefined} className="line-clamp-1 text-white text-xs font-medium font-sans text-left">
+                        {card.date}
                     </motion.p>
                 </div>
                 <BlurImage src={card.src} alt={card.title} fill className="object-cover absolute z-10 inset-0" />
@@ -229,7 +220,8 @@ export const BlurImage = ({ height, width, src, className, alt, ...rest }: Image
             src={src}
             width={width}
             height={height}
-            loading="lazy"
+            priority={true}
+            // loading="lazy"
             decoding="async"
             blurDataURL={typeof src === 'string' ? src : undefined}
             alt={alt ? alt : 'Background of a beautiful view'}

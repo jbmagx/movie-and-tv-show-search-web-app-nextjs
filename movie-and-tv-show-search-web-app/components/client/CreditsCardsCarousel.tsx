@@ -15,7 +15,6 @@ type Card = {
     src: string;
     name: string;
     character: string;
-    content: React.ReactNode;
 };
 
 export const CarouselContext = createContext<{

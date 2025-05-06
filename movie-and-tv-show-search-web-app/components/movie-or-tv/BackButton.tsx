@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/custom/Button';
 import { ArrowLeft } from 'lucide-react';
 
 export default function BackButton() {
@@ -13,13 +14,10 @@ export default function BackButton() {
 
     return (
         <div className="flex items-center gap-x-2">
-            <button
-                onClick={handleGoBack}
-                className="flex items-center justify-center bg-black dark:bg-white text-white dark:text-black h-8 w-8 rounded-md"
-            >
+            <Button isIconOnly size="sm" radius="sm" onClick={handleGoBack}>
                 <ArrowLeft />
-            </button>
-            <span className="text-sm">Back</span>
+            </Button>
+            <span className="font-medium text-sm">Back</span>
         </div>
     );
 }

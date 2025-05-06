@@ -1,21 +1,41 @@
-type Movie = {
+type MediaBase = {
+    id: number;
     adult: boolean;
     backdrop_path: string;
     genre_ids: number[];
-    id: number;
     original_language: string;
-    original_title: string;
     overview: string;
     popularity: number;
     poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
     vote_average: number;
     vote_count: number;
 };
 
+type Movie = MediaBase & {
+    media_type?: 'movie';
+    original_title: string;
+    release_date: string;
+    title: string;
+    video?: boolean;
+};
+
+type TVShow = MediaBase & {
+    media_type?: 'tv';
+    first_air_date: string;
+    name: string;
+    origin_country: string[];
+    original_name: string;
+};
+
+type TMDBResponse = {
+    page: number;
+    results: Movie[] | TVShow[];
+    total_pages: number;
+    total_results: number;
+};
+
 type MovieDetails = {
+    id: number;
     adult: boolean;
     backdrop_path: string;
     belongs_to_collection: {
@@ -30,7 +50,6 @@ type MovieDetails = {
         name: string;
     }[];
     homepage: string;
-    id: number;
     imdb_id: string;
     origin_country: string[];
     original_language: string;
@@ -64,23 +83,6 @@ type MovieDetails = {
     vote_count: number;
 };
 
-type TVShow = {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    origin_country: string[];
-    original_language: string;
-    original_name: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    first_air_date: string;
-    name: string;
-    vote_average: number;
-    vote_count: number;
-};
-
 type MovieCredits = {
     id: number;
     cast: MovieCastMember[];
@@ -88,35 +90,36 @@ type MovieCredits = {
 };
 
 type MovieCastMember = {
-    adult: boolean;
-    gender: number;
     id: number;
-    known_for_department: string;
-    name: string;
-    original_name: string;
-    popularity: number;
-    profile_path: string | null;
+    adult: boolean;
     cast_id: number;
     character: string;
     credit_id: string;
+    gender: number;
+    known_for_department: string;
+    name: string;
     order: number;
+    original_name: string;
+    popularity: number;
+    profile_path: string | null;
 };
 
 type MovieCrewMember = {
-    adult: boolean;
-    gender: number;
     id: number;
+    adult: boolean;
+    credit_id: string;
+    department: string;
+    gender: number;
+    job: string;
     known_for_department: string;
     name: string;
     original_name: string;
     popularity: number;
     profile_path: string | null;
-    credit_id: string;
-    department: string;
-    job: string;
 };
 
 type TVShowDetails = {
+    id: number;
     adult: boolean;
     backdrop_path: string;
     created_by: {
@@ -133,7 +136,6 @@ type TVShowDetails = {
         name: string;
     }[];
     homepage: string;
-    id: number;
     in_production: boolean;
     languages: string[];
     last_air_date: string;
@@ -220,74 +222,29 @@ type TVShowCredits = {
 };
 
 type TVShowCastMember = {
-    adult: boolean;
-    gender: number | null;
     id: number;
+    adult: boolean;
+    character: string;
+    credit_id: string;
+    gender: number | null;
     known_for_department: string;
     name: string;
+    order: number;
     original_name: string;
     popularity: number;
     profile_path: string | null;
-    character: string;
-    credit_id: string;
-    order: number;
 };
 
 type TVShowCrewMember = {
-    adult: boolean;
-    gender: number | null;
     id: number;
+    adult: boolean;
+    credit_id: string;
+    department: string;
+    gender: number | null;
+    job: string;
     known_for_department: string;
     name: string;
     original_name: string;
     popularity: number;
     profile_path: string | null;
-    credit_id: string;
-    department: string;
-    job: string;
-};
-
-type TrendingMovieOrTVShow = {
-    backdrop_path: string;
-    id: number;
-    name?: string; // For TV shows
-    title?: string; // For movies
-    original_name?: string; // For TV shows
-    original_title?: string; // For movies
-    overview: string;
-    poster_path: string;
-    media_type: 'tv' | 'movie';
-    adult: boolean;
-    original_language: string;
-    genre_ids: number[];
-    popularity: number;
-    first_air_date?: string; // For TV shows
-    release_date?: string; // For movies
-    video?: boolean; // For movies
-    vote_average: number;
-    vote_count: number;
-    origin_country?: string[]; // For TV shows
-};
-
-type MovieOrTVShow = {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    vote_average: number;
-    vote_count: number;
-    // Movie-specific properties
-    title?: string;
-    original_title?: string;
-    release_date?: string;
-    video?: boolean;
-    // TV show-specific properties
-    name?: string;
-    original_name?: string;
-    first_air_date?: string;
-    origin_country?: string[];
 };

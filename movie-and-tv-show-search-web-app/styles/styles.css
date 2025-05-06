@@ -2,6 +2,28 @@ html {
     --tmdbSearchColumns: 1;
 }
 
+@media only screen and (min-width: 375px) {
+    html {
+        --tmdbSearchColumns: 2;
+    }
+}
+
+@media only screen and (min-width: 540px) {
+    html {
+        --tmdbSearchColumns: 3;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    html {
+        --tmdbSearchColumns: 4;
+    }
+}
+
+/* html {
+    --tmdbSearchColumns: 1;
+}
+
 @media only screen and (min-width: 512px) {
     html {
         --tmdbSearchColumns: 2;
@@ -18,4 +40,4 @@ html {
     html {
         --tmdbSearchColumns: 4;
     }
-}
+} */
